@@ -7,6 +7,7 @@ function Nav() {
     <div>
       <Link to="/pay">払う</Link>
       <Link to="/paid">払われる</Link>
+      <Link to="/ticket">チケット発行</Link>
     </div>
   );
 }

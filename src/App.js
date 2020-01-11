@@ -6,6 +6,7 @@ import Pay from "./Pay";
 import Paid from "./Paid";
 import Nav from "./Nav";
 import Top from "./Top";
+import Ticket from "./Ticket";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" component={Top} exact />
           <Route path="/pay" component={Pay} />
           <Route path="/paid" component={Paid} />
+          <Route path="/ticket" component={Ticket} />
           <Route component={Error} />
         </Switch>
       </main>
