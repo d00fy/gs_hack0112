@@ -7,16 +7,26 @@ const initialState = [];
 function Pay() {
   const [showData, setData] = useState(initialState);
 
-  const url = "http://192.168.10.189:8000/api/user/userName";
-  async function getApi() {
+  let userId = {
+    user_id: 1
+  };
+
+  const url = "http://192.168.10.189:8000/api/user/userPage";
+
+  async function postApi() {
     const res = await fetch(url, {
-      mode: "cors"
+      method: "post",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8"
+      },
+      body: JSON.stringify(userId)
     });
     const data = await res.json();
     return data;
   }
 
-  getApi()
+  postApi()
     .then(data => {
       console.log(JSON.stringify(data));
       setData(JSON.stringify(data));
@@ -25,24 +35,31 @@ function Pay() {
       console.log(err);
     });
 
-  //
-  const url2 = "http://192.168.10.189:8000/api/ticket/create";
-  let user = {
-    menter_id: 2,
-    student_id: 2,
-    content: "焼肉"
-  };
+  // async function getApi() {
+  //   const res = await fetch(url, {
+  //     method: "post",
+  //     mode: "cors"
+  //   });
+  //   const data = await res.json();
+  //   return data;
+  // }
 
-  async function postApi() {
-    await fetch(url2, {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8"
-      },
-      body: JSON.stringify(user)
-    });
-  }
+  // getApi()
+  // .then(data => {
+  //   console.log(JSON.stringify(data));
+  //   setData(JSON.stringify(data));
+  // })
+  // .catch(err => {
+  //   console.log(err);
+  // });
+
+  //
+  // const url2 = "http://192.168.10.189:8000/api/ticket/create";
+  // let user = {
+  //   menter_id: 2,
+  //   student_id: 2,
+  //   content: "焼肉"
+  // };
 
   // let result = await response.json();
   // alert(result.message);
@@ -52,7 +69,7 @@ function Pay() {
       <p>{showData} </p>
       <button
         onClick={() => {
-          postApi();
+          console.log("OK");
         }}
       >
         送信
