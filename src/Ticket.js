@@ -17,16 +17,35 @@ function Ticket() {
     return data;
   }
 
+  function final() {
+    showData.map(x => {
+      const xx = [];
+      xx.push(x);
+      console.log(xx[0].id);
+      return (
+        <option value={xx[0].id} key={xx[0].id}>
+          {xx[0].name}
+        </option>
+      );
+    });
+  }
+
   useEffect(() => {
     getApi()
       .then(data => {
         console.log(data);
+        // const userList = [];
+        // for (let count = 0; count < data.length; count++) {
+        //   userList.push(data[count]);
+        // }
+        // console.log(userList);
         setData((showData.Data = data));
-        console.log(showData.Data[0]);
       })
       .catch(err => {
         console.log(err);
       });
+
+    // return final();
   }, []);
 
   // const handleChange = e => {
@@ -35,17 +54,15 @@ function Ticket() {
   // };
 
   console.log(showData.Data);
+  console.log(showData[1]);
+
   return (
     <>
       <h1>新規チケット発行</h1>
-      <select
-        // onChange={() => {
-        //   handleChange().bind(this);
-        // }}
-        onChange={e => setData({ value: e.target.value })}
-      >
+      <select onChange={e => setData({ value: e.target.value })}>
         <option value="">誰に？</option>
-        {showData.Data.map(x => {
+        return final();
+        {/* {showData.map(x => {
           const xx = [];
           xx.push(x);
           console.log(xx[0].id);
@@ -54,7 +71,7 @@ function Ticket() {
               {xx[0].name}
             </option>
           );
-        })}
+        })} */}
       </select>
       <h2>チケット内容</h2>
       <div>
