@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // import { BrowserRouter, Route, Switch } from "react-router-dom";
 const initialState = [];
@@ -26,13 +26,17 @@ function Pay() {
     return data;
   }
 
-  postApi()
-    .then(data => {
-      setData(data);
-    })
-    .catch(err => {
-      console.log(err);
-    });
+  useEffect(() => {
+    postApi()
+      .then(data => {
+        setData(data.payList[0]);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
+
+  console.log(showData.name);
 
   // async function getApi() {
   //   const res = await fetch(url, {
@@ -63,11 +67,7 @@ function Pay() {
   // let result = await response.json();
   // alert(result.message);
 
-  return (
-    <div>
-      <p>{showData.user_id} </p>
-    </div>
-  );
+  return <p>aodijf</p>;
 }
 
 export default Pay;
