@@ -28,8 +28,7 @@ function Pay() {
 
   postApi()
     .then(data => {
-      console.log(JSON.stringify(data));
-      setData(JSON.stringify(data));
+      setData(data);
     })
     .catch(err => {
       console.log(err);
@@ -66,14 +65,7 @@ function Pay() {
 
   return (
     <div>
-      <p>{showData} </p>
-      <button
-        onClick={() => {
-          console.log("OK");
-        }}
-      >
-        送信
-      </button>
+      <p>{showData.user_id} </p>
     </div>
   );
 }
