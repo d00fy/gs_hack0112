@@ -17,7 +17,7 @@ function Ticket() {
     return data;
   }
 
-  function final() {
+  function final(props) {
     showData.map(x => {
       const xx = [];
       xx.push(x);
@@ -61,7 +61,7 @@ function Ticket() {
       <h1>新規チケット発行</h1>
       <select onChange={e => setData({ value: e.target.value })}>
         <option value="">誰に？</option>
-        return final();
+        <final />
         {/* {showData.map(x => {
           const xx = [];
           xx.push(x);
