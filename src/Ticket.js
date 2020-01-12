@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { useState, useEffect } from "react";
 
-const initialState = [];
+const initialState = { Data: [], value: 0 };
 function Ticket() {
   const [showData, setData] = useState(initialState);
 
@@ -21,64 +21,31 @@ function Ticket() {
     getApi()
       .then(data => {
         console.log(data);
-        setData(data);
+        setData((showData.Data = data));
+        console.log(showData.Data[0]);
       })
       .catch(err => {
         console.log(err);
       });
   }, []);
 
-  // let userId = {
-  //   user_id: 1
+  // const handleChange = e => {
+  //   console.log(11223);
+  //   setData({ value: e.target.value });
   // };
 
-  // const url = "http://192.168.10.189:8000/api/user/userPage";
-
-  // async function postApi() {
-  //   const res = await fetch(url, {
-  //     method: "post",
-  //     mode: "cors",
-  //     headers: {
-  //       "Content-Type": "application/json;charset=utf-8"
-  //     },
-  //     body: JSON.stringify(userId)
-  //   });
-  //   const data = await res.json();
-  //   return data;
-  // }
-
-  // // postApi()
-  // //   .then(data => {
-  // //     setData(data);
-  // //   })
-  // //   .catch(err => {
-  // //     console.log(err);
-  // //   });
-
-  // useEffect(() => {
-  //   postApi()
-  //     .then(data => {
-  //       // console.log(JSON.stringify(data));
-  //       console.log(data);
-  //       // const items = [];
-  //       // items.push(data);
-  //       // console.log(items);
-  //       setData(data);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  //   // console.log(showData);
-  // }, []);
-
-  console.log(showData);
-
+  console.log(showData.Data);
   return (
     <>
       <h1>新規チケット発行</h1>
-      <select>
+      <select
+        // onChange={() => {
+        //   handleChange().bind(this);
+        // }}
+        onChange={e => setData({ value: e.target.value })}
+      >
         <option value="">誰に？</option>
-        {showData.map(x => {
+        {showData.Data.map(x => {
           const xx = [];
           xx.push(x);
           console.log(xx[0].id);

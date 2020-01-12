@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { useState } from "react";
 
@@ -26,18 +26,42 @@ function Paid() {
     return data;
   }
 
-  postApi()
-    .then(data => {
-      setData(data);
-    })
-    .catch(err => {
-      console.log(err);
-    });
+  useEffect(() => {
+    postApi()
+      .then(data => {
+        const receiveList = [];
+        console.log(data.receiveList.length);
+        for (let count = 0; count < data.receiveList.length; count++) {
+          receiveList.push(data.receiveList[count]);
+        }
+        setData(receiveList);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
 
   return (
-    <div>
-      <p>{showData.user_id} </p>
-    </div>
+    <>
+      <table>
+        <tr>
+          <td>名前</td>
+          <td>内容</td>
+          <td>発行日</td>
+          <td>ステータス</td>
+        </tr>
+        {showData.map(x => {
+          return (
+            <tr>
+              <td>{x.name}</td>
+              <td>{x.content}</td>
+              <td>{x.time}</td>
+              <td>{x.status ? "true" : "false"}</td>
+            </tr>
+          );
+        })}
+      </table>
+    </>
   );
 }
 

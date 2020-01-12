@@ -29,14 +29,19 @@ function Pay() {
   useEffect(() => {
     postApi()
       .then(data => {
-        setData(data.payList[0]);
+        const payList = [];
+        console.log(data.payList.length);
+        for (let count = 0; count < data.payList.length; count++) {
+          payList.push(data.payList[count]);
+        }
+        setData(payList);
       })
       .catch(err => {
         console.log(err);
       });
   }, []);
 
-  console.log(showData.name);
+  console.log(showData[0]);
 
   // async function getApi() {
   //   const res = await fetch(url, {
@@ -67,7 +72,28 @@ function Pay() {
   // let result = await response.json();
   // alert(result.message);
 
-  return <p>aodijf</p>;
+  return (
+    <>
+      <table>
+        <tr>
+          <td>名前</td>
+          <td>内容</td>
+          <td>発行日</td>
+          <td>ステータス</td>
+        </tr>
+        {showData.map(x => {
+          return (
+            <tr>
+              <td>{x.name}</td>
+              <td>{x.content}</td>
+              <td>{x.time}</td>
+              <td>{x.status ? "true" : "false"}</td>
+            </tr>
+          );
+        })}
+      </table>
+    </>
+  );
 }
 
 export default Pay;
